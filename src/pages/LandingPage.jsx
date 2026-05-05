@@ -1,10 +1,8 @@
 import { useRef } from "react";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function LandingPage() {
   const navigate = useNavigate();
-  const founderRef = useRef(null);
 
   // refs for scroll
   const featuresRef = useRef(null);

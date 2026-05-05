@@ -10,14 +10,11 @@ function Dsa() {
 
 const navigate = useNavigate();
 const location = useLocation();
-const [showHintBox, setShowHintBox] = useState(false);
 
 const [loadingFeedback, setLoadingFeedback] = useState(false);
 
-const [isHintOpen, setIsHintOpen] = useState(false);
 const [hintLoading, setHintLoading] = useState(false);
 const [hint, setHint] = useState("");
-const [feedbackData, setFeedbackData] = useState(null);
  const type = location.state?.type || "DSA";
   const level = location.state?.level || "easy";
 const [timeComplexity, setTimeComplexity] = useState("-");

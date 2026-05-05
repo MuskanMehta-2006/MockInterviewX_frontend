@@ -126,7 +126,6 @@ const handleLogin = async () => {
     }
   }
 };
-  const [step, setStep] = useState(1);
 
   const styles = {
     container: {
