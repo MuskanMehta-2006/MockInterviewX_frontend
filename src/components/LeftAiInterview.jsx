@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import API from "../services/api";
 
 function LeftAiInterview({ type , level , onTimeUp }) {
   const [data, setData] = useState(null);
@@ -64,8 +65,8 @@ function LeftAiInterview({ type , level , onTimeUp }) {
   useEffect(() => {
     const fetchQuestion = async () => {
       try {
-        const res = await axios.get(
-          "http://localhost:8080/api/ai/interview/question",
+        const res = await API.get(
+          "/interview/question",
           {
             params: {
   type: type?.toUpperCase() || "DSA",
