@@ -13,7 +13,8 @@ const navigate = useNavigate();
 const location = useLocation();
 
 const [loadingFeedback, setLoadingFeedback] = useState(false);
-
+const [aiData, setAiData] = useState({});
+const [loadingQ, setLoadingQ] = useState(false);
 const [hintLoading, setHintLoading] = useState(false);
 const [hint, setHint] = useState("");
  const type = location.state?.type || "DSA";
@@ -110,7 +111,32 @@ import pandas as pd
     setLanguage("sql");
   }
 }, [type]);
- const aiData = JSON.parse(sessionStorage.getItem("question") || "{}");
+ useEffect(() => {
+  const fetchQuestion = async () => {
+    try {
+      setLoadingQ(true);
+
+      const res = await API.get(
+        `/api/ai/interview/question?level=${level}&type=${type}`
+      );
+
+      console.log("QUESTION API RESPONSE:", res.data);
+
+      setAiData(res.data);
+
+      // optional: store in session
+      sessionStorage.setItem("question", JSON.stringify(res.data));
+
+    } catch (err) {
+      console.error("Question fetch error:", err);
+      toast.error("Failed to load question");
+    } finally {
+      setLoadingQ(false);
+    }
+  };
+
+  fetchQuestion();
+}, [level, type]);
 const endTest = async () => {
   setLoadingFeedback(true);
 
