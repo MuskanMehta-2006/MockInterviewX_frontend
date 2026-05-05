@@ -66,7 +66,7 @@ function LeftAiInterview({ type , level , onTimeUp }) {
     const fetchQuestion = async () => {
       try {
         const res = await API.get(
-          "/interview/question",
+          "/ai/interview/question",
           {
             params: {
   type: type?.toUpperCase() || "DSA",
