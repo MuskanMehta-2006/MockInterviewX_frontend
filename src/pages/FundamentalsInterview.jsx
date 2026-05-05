@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useLocation,useNavigate } from "react-router-dom";
+import API from "../services/api";
 
 
 export default function FundamentalsInterview() {
@@ -39,28 +40,24 @@ const endTest = () => {
       answers
     }
   });
-};useEffect(() => {
+};
+useEffect(() => {
   const fetchQuestions = async () => {
     try {
       setLoading(true);
 
-      const res = await fetch("http://localhost:8080/api/ai/interview/theoryQuestions", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          type,
-          level
-        })
+      const res = await API.post("/ai/interview/theoryQuestions", {
+        type,
+        level,
       });
 
-      const data = await res.json();
+      const data = res.data; // ✅ axios way
+
       setQuestions(Array.isArray(data) ? data : data.questions || []);
     } catch (err) {
       console.error("Error fetching questions:", err);
     } finally {
-      setLoading(false); // 🔥 VERY IMPORTANT
+      setLoading(false);
     }
   };
 

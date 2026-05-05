@@ -6,6 +6,7 @@ import axios from "axios";
 
 import { useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import API from "../services/api";
 function Dsa() {
 
 const navigate = useNavigate();
@@ -35,8 +36,8 @@ const [spaceComplexity, setSpaceComplexity] = useState("-");
   setHintLoading(true);
 
   try {
-    const res = await axios.post(
-      "http://localhost:8080/api/ai/interview/hint",
+    const res = await API.post(
+      "/ai/interview/hint",
       {
         question: aiData?.statement,
         code,
@@ -141,8 +142,8 @@ const endTest = async () => {
 
   // ✅ CASE 3: PASSED → AI CALL
   try {
-    const res = await axios.post(
-      "http://localhost:8080/api/ai/interview/feedback",
+    const res = await API.post(
+      "/ai/interview/feedback",
       {
         question: aiData?.statement,
         code,
@@ -198,8 +199,8 @@ const runCode = async () => {
   setResult("Running...");
 
   try {
-    const res = await axios.post(
-      "http://localhost:8080/api/ai/interview/evaluate",
+    const res = await API.post(
+      "/ai/interview/evaluate",
       {
         question: aiData?.statement,
         code: code,              // 👈 IMPORTANT FIX
@@ -238,8 +239,8 @@ const submitCode = async () => {
   setAttempts(prev => prev + 1);
 
   try {
-    const res = await axios.post(
-      "http://localhost:8080/api/ai/interview/evaluate",
+    const res = await API.post(
+      "/ai/interview/evaluate",
       {
         question: aiData?.statement,
         code: code,

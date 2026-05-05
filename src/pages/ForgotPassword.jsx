@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 import { color } from "framer-motion";
+import API from "../services/api";
 
 export default function ForgotPassword() {
     const [loading, setLoading] = useState(false);
@@ -27,7 +28,7 @@ const sendOtp = async () => {
     alert("Checking email...");
 
     // 🔥 SEND OTP WITH ROLE
-    await axios.post("http://localhost:8080/api/auth/send-otp", {
+    await API.post("/auth/send-otp", {
       email,
       role, // ✔️ IMPORTANT
       type: "FORGOT",
@@ -82,7 +83,7 @@ const sendOtp = async () => {
 };
 const verifyOtp = async () => {
   try {
-    await axios.post("http://localhost:8080/api/auth/verify-otp", {
+    await API.post("/auth/verify-otp", {
       email,
       otp,
     });
@@ -97,7 +98,7 @@ const verifyOtp = async () => {
 };
 const resetPassword = async () => {
   try {
-    await axios.post("http://localhost:8080/api/auth/reset-password", {
+    await API.post("/auth/reset-password", {
       email,
       newPassword:password
     });
@@ -374,7 +375,7 @@ inputFocus: {
 
     try {
       // 2️⃣ API call
-      await axios.post("http://localhost:8080/api/auth/reset-password", {
+      await API.post("/auth/reset-password", {
         email,
         newPassword: password,
       });

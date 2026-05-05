@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { signInWithPopup } from "firebase/auth";
 import { auth, provider } from "../firebase";
+import API from "../services/api";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -16,7 +17,7 @@ const [password, setPassword] = useState("");
   const navigate = useNavigate();
 const handleLogin = async () => {
   try {
-    const res = await axios.post("http://localhost:8080/api/auth/login", {
+    const res = await API.post("/auth/login", {
       email,
       password,
       role,
@@ -75,7 +76,7 @@ const handleLogin = async () => {
 
     console.log("Google User:", user);
 
-    const res = await axios.post("http://localhost:8080/api/auth/google-login", {
+    const res = await API.post("/auth/google-login", {
       email: user.email,
       name: user.displayName,
       role,

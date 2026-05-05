@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import API from "../services/api";
 export default function HumanInterview() {
   const [interviewers, setInterviewers] = useState([]);
   const [selected, setSelected] = useState(null);
@@ -15,7 +16,7 @@ export default function HumanInterview() {
 
   const fetchInterviewers = async () => {
     try {
-      const res = await axios.get("http://localhost:8080/api/interviewer/all");
+      const res = await API.get("/interviewer/all");
       setInterviewers(res.data);
     } catch (err) {
       console.log(err);
@@ -29,8 +30,8 @@ export default function HumanInterview() {
     }
 
     try {
-      const res = await axios.post(
-        "http://localhost:8080/api/booking/create-order",
+      const res = await API.post(
+        "/booking/create-order",
         { amount: intv.price }
       );
 
@@ -47,7 +48,7 @@ export default function HumanInterview() {
         handler: async function (response) {
          toast.success("Payment Successful! Please wait a minute...Don't go back");
 
-          await axios.post("http://localhost:8080/api/booking/confirm", {
+          await API.post("/booking/confirm", {
             
             intervieweeEmail: JSON.parse(localStorage.getItem("user")).email,
             interviewerEmail: intv.email,

@@ -4,6 +4,7 @@ import { auth, provider } from "../firebase";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
+import API from "../services/api";
 
 export default function ForgotPassword() {
     const [loading, setLoading] = useState(false);
@@ -28,7 +29,7 @@ const sendOtp = async () => {
     console.log("Sending OTP for:", email, role);
 
     // 🔥 API CALL WITH ROLE
-    await axios.post("http://localhost:8080/api/auth/send-otp", {
+    await API.post("/auth/send-otp", {
       email,
       role, // ✔️ IMPORTANT
       type: "REGISTER",
@@ -95,7 +96,7 @@ const sendOtp = async () => {
 };
 const verifyOtp = async () => {
   try {
-    await axios.post("http://localhost:8080/api/auth/verify-otp", {
+    await API.post("/auth/verify-otp", {
       email,
       otp,
     });
@@ -110,7 +111,7 @@ const verifyOtp = async () => {
 };
 const resetPassword = async () => {
   try {
-    await axios.post("http://localhost:8080/api/auth/reset-password", {
+    await API.post("/auth/reset-password", {
       email,
       newPassword:password
     });
@@ -126,7 +127,7 @@ const resetPassword = async () => {
 
 const handleLogin = async () => {
   try {
-    const res = await axios.post("http://localhost:8080/api/auth/login", {
+    const res = await API.post("/auth/login", {
       email,
       password,
     });
@@ -149,7 +150,7 @@ const handleLogin = async () => {
     console.log("Google User:", user);
 
     // 🔥 (IMPORTANT) send user to backend
-    await axios.post("http://localhost:8080/api/auth/google-login", {
+    await API.post("/auth/google-login", {
       email: user.email,
       name: user.displayName,
     });

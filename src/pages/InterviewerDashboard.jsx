@@ -2,6 +2,7 @@ import React, { useState,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
+import API from "../services/api";
 
 export default function InterviewerDashboard() {
   const navigate = useNavigate();
@@ -29,8 +30,8 @@ console.log("profile.email is"+profile.email);
 
 const fetchBookings = async () => {
     try {
-      const res = await axios.get(
-        `http://localhost:8080/api/booking/interviewer?email=${email}`
+      const res = await API.get(
+        `/booking/interviewer?email=${email}`
       );
       setBookings(res.data);
     } catch (err) {
@@ -41,8 +42,8 @@ const fetchBookings = async () => {
   useEffect(() => {
   const fetchProfile = async () => {
     try {
-      const res = await axios.get(
-        `http://localhost:8080/api/interviewer/by-email?email=${email}`
+      const res = await API.get(
+        `/interviewer/by-email?email=${email}`
       );
       console.log("res.data.email is:"+res.data.email);
       setProfile((prev) => ({

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import API from "../services/api";
 
 export default function FeedbackTheory() {
   const location = useLocation();
@@ -18,40 +19,31 @@ export default function FeedbackTheory() {
   // 🔥 API CALL
   // =========================
   useEffect(() => {
-    const fetchFeedback = async () => {
-      try {
-        setLoading(true);
+  const fetchFeedback = async () => {
+    try {
+      setLoading(true);
 
-        const res = await fetch(
-          "http://localhost:8080/api/ai/interview/theory-feedback",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              questions,
-              answers,
-            }),
-          }
-        );
+      const res = await API.post("/ai/interview/theory-feedback", {
+        questions,
+        answers,
+      });
 
-        const result = await res.json();
+      const result = res.data;
 
-        setData({
-          score: result.score || 0,
-          feedback: result.feedback || "No feedback available",
-          scores: result.scores || [],
-        });
-      } catch (err) {
-        console.error("Feedback API error:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
+      setData({
+        score: result.score || 0,
+        feedback: result.feedback || "No feedback available",
+        scores: result.scores || [],
+      });
+    } catch (err) {
+      console.error("Feedback API error:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    fetchFeedback();
-  }, []);
+  fetchFeedback();
+}, [questions, answers]);
 
   const getScoreColor = () => {
     if (data.score >= 80) return "#22c55e";

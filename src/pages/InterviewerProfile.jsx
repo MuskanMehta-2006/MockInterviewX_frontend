@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
+import API from "../services/api";
 
 
 export default function InterviewerProfile() {
@@ -111,8 +112,8 @@ export default function InterviewerProfile() {
   };
 
   try {
-    const res = await axios.put(
-      `http://localhost:8080/api/interviewer`, // 🔥 NO userId
+    const res = await API.put(
+      `/interviewer`, // 🔥 NO userId
       payload
     );
 
