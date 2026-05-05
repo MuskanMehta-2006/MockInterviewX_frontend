@@ -117,7 +117,7 @@ import pandas as pd
       setLoadingQ(true);
 
       const res = await API.get(
-        `/api/ai/interview/question?level=${level}&type=${type}`
+        `/ai/interview/question?level=${level}&type=${type}`
       );
 
       console.log("QUESTION API RESPONSE:", res.data);
