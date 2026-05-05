@@ -46,7 +46,7 @@ export default function HumanInterview() {
         order_id: orderId,
 
         handler: async function (response) {
-         toast.success("Payment Successful! Please wait a minute...Don't go back");
+         toast.success("Payment Successful! Check your email for further details");
 
           await API.post("/booking/confirm", {
             
@@ -60,8 +60,6 @@ export default function HumanInterview() {
             status: "PAID",
             
           });
-
-          toast.success("🎉 Interview Booked Successfully!\n📩 Please check your email for further details");
         },
 
         prefill: {
