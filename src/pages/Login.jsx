@@ -229,163 +229,222 @@ inputFocus: {
     <div style={styles.container}>
       <div style={styles.card}>
 
-        {/* LEFT */}
-        <div style={styles.left}>
+      {isMobile ? (
 
-          {/* BRAND */}
-          <div
-  style={{
-    display: "flex",
-    alignItems: "center",
-    gap: "6px",
-    position: isMobile ? "static" : "absolute", // ⭐ FIX
-    marginBottom: isMobile ? "10px" : "0",
-    top: "15px",
-    left: "20px",
-  }}
->
-            <img
-              src="/icon-website.png"
-              alt="logo"
-              style={{ width: "24px", height: "24px" }}
-            />
+  // ================= MOBILE =================
+  <div style={{ width: "100%" }}>
 
-            <span style={{ fontWeight: "700", fontSize: "16px", color: "#111" }}>
-              MockInterview
-              <span style={{ color: "#4f46e5", fontWeight: "900" }}>X</span>
-            </span>
-          </div>
+    {/* TOP BAR */}
+    <div style={{
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+      marginBottom: "10px"
+    }}>
+      <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+        <img src="/icon-website.png" style={{ width: "22px" }} />
+        <span style={{ fontWeight: "700" }}>
+          MockInterview<span style={{ color: "#4f46e5" }}>X</span>
+        </span>
+      </div>
 
-         <img
-  src={role === "interviewer" ? "/login-interviewer.png" : "/login.png"}
-  alt="auth"
- style={{
-    width: "100%",
-    maxWidth: isMobile ? "220px" : "400px", // ⭐ IMPORTANT
-    height: "auto",
-    objectFit: "contain"
-  }}
-/>
+      <div style={{ color: "#4f46e5", fontWeight: "600" }}>
+        {role === "interviewer" ? "👨‍🏫" : "👨‍💻"}
+      </div>
+    </div>
 
-        </div>
+    {/* IMAGE */}
+    <div style={{ textAlign: "center", marginBottom: "15px" }}>
+      <img
+        src={role === "interviewer" ? "/login-interviewer.png" : "/login.png"}
+        style={{
+          width: "100%",
+          maxWidth: "260px",
+          height: "auto"
+        }}
+      />
+    </div>
 
-  {/* RIGHT */}
-<div style={styles.right}>
-<div
-  style={{
-    position: "absolute",
-    top: "15px",
-    right: "25px",
-    fontWeight: "700",
-    fontSize: "14px",
-    color: "#4f46e5"
-  }}
->
-  {role === "interviewer"
-    ? "👨‍🏫 Interviewer Login"
-    : "👨‍💻 Interviewee Login"}
-</div>
- 
-<div
-  style={{
-    ...styles.googleBtn,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: "8px",
-    cursor: "pointer",
-  }}
-  onClick={handleGoogleLogin}
->
-  <img
-    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg"
-    alt="google"
-    style={{ width: "18px", height: "18px" }}
-  />
+    {/* FORM CARD */}
+    <div style={{
+      background: "white",
+      padding: "20px",
+      borderRadius: "16px",
+      boxShadow: "0 10px 25px rgba(0,0,0,0.08)"
+    }}>
 
-  Continue with Google
-</div>
+      {/* GOOGLE */}
+      <div
+        onClick={handleGoogleLogin}
+        style={{
+          border: "1px solid #e2e8f0",
+          padding: "12px",
+          borderRadius: "8px",
+          textAlign: "center",
+          marginBottom: "10px",
+          cursor: "pointer"
+        }}
+      >
+        Continue with Google
+      </div>
 
-  <div style={styles.divider}>OR</div>
-{/* EMAIL */}
-<div style={{ marginBottom: "12px" }}>
-  <label
-    style={{
-      display: "block",
-      fontSize: "13px",
-      fontWeight: "600",
-      marginBottom: "6px",
-      color: "#111",
-    }}
-  >
-    Email*
-  </label>
+      <div style={{ textAlign: "center", margin: "10px 0" }}>OR</div>
 
-  <input
-    type="email"
-    placeholder="Enter email"
-    value={email}
-  onChange={(e) => setEmail(e.target.value)}
+      {/* EMAIL */}
+      <input
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        style={{
+          width: "100%",
+          padding: "12px",
+          marginBottom: "10px",
+          borderRadius: "8px",
+          border: "1px solid #ddd"
+        }}
+      />
 
-    style={styles.input}
-  />
-</div>
-{/* PASSWORD */}
-<div style={{ marginBottom: "12px" }}>
-  <label
-    style={{
-      display: "block",
-      fontSize: "13px",
-      fontWeight: "600",
-      marginBottom: "6px",
-      color: "#111",
-    }}
-  >
-    Password*
-  </label>
+      {/* PASSWORD */}
+      <input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        style={{
+          width: "100%",
+          padding: "12px",
+          marginBottom: "10px",
+          borderRadius: "8px",
+          border: "1px solid #ddd"
+        }}
+      />
 
-  <input
-    type="password"
-    placeholder="Enter password"
-    value={password}
-    onChange={(e) => setPassword(e.target.value)}
-    style={styles.input}
-  />
-</div>
-  {/* FORGOT PASSWORD */}
-  <div onClick={() => navigate("/forgot-password", { state: { role } })}
-    style={{
-      textAlign: "right",
-      fontSize: "12px",
-      color: "#4f46e5",
-      cursor: "pointer",
-      marginBottom: "10px",
-      fontWeight: "500",
-    }}
-  >
-    Forgot password?
+      {/* FORGOT */}
+      <div
+        onClick={() => navigate("/forgot-password", { state: { role } })}
+        style={{
+          textAlign: "right",
+          fontSize: "12px",
+          color: "#4f46e5",
+          marginBottom: "15px",
+          cursor: "pointer"
+        }}
+      >
+        Forgot password?
+      </div>
+
+      {/* LOGIN */}
+      <button
+        onClick={handleLogin}
+        style={{
+          width: "100%",
+          padding: "12px",
+          background: "#4f46e5",
+          color: "white",
+          border: "none",
+          borderRadius: "8px"
+        }}
+      >
+        Login
+      </button>
+
+      {/* REGISTER */}
+      <p style={{ marginTop: "10px", textAlign: "center" }}>
+        Don’t have an account?{" "}
+        <span
+          onClick={() => navigate("/register", { state: { role } })}
+          style={{ color: "#4f46e5", cursor: "pointer" }}
+        >
+          Register
+        </span>
+      </p>
+
+    </div>
   </div>
 
-  {/* LOGIN BUTTON */}
-  <button onClick={handleLogin} style={styles.button}>
-  Login
-</button>
+) : (
 
-  {/* REGISTER LINK */}
-  <p style={{ marginTop: "12px", fontSize: "13px", color: "#64748b" }}>
-    Don’t have an account?{" "}
-    <span
-      style={{
-        color: "#4f46e5",
-        fontWeight: "600",
-        cursor: "pointer",
-      }} onClick={() =>navigate("/register", { state: { role } })}
-    >
-      Register
-    </span>
-  </p>
+  // ================= DESKTOP (UNCHANGED) =================
+  <>
+    {/* LEFT */}
+    <div style={styles.left}>
+      <div style={{
+        display: "flex",
+        alignItems: "center",
+        gap: "6px",
+        position: "absolute",
+        top: "15px",
+        left: "20px",
+      }}>
+        <img src="/icon-website.png" style={{ width: "24px" }} />
+        <span style={{ fontWeight: "700" }}>
+          MockInterview<span style={{ color: "#4f46e5" }}>X</span>
+        </span>
+      </div>
 
-</div>
+      <img
+        src={role === "interviewer" ? "/login-interviewer.png" : "/login.png"}
+        style={{ maxWidth: "400px" }}
+      />
+    </div>
+
+    {/* RIGHT */}
+    <div style={styles.right}>
+      <div style={{
+        position: "absolute",
+        top: "15px",
+        right: "25px",
+        fontWeight: "700",
+        color: "#4f46e5"
+      }}>
+        {role === "interviewer"
+          ? "👨‍🏫 Interviewer Login"
+          : "👨‍💻 Interviewee Login"}
+      </div>
+
+      <div
+        style={styles.googleBtn}
+        onClick={handleGoogleLogin}
+      >
+        Continue with Google
+      </div>
+
+      <div style={styles.divider}>OR</div>
+
+      <input
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        style={styles.input}
+      />
+
+      <input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        style={styles.input}
+      />
+
+      <div
+        onClick={() => navigate("/forgot-password", { state: { role } })}
+        style={{
+          textAlign: "right",
+          fontSize: "12px",
+          color: "#4f46e5",
+          marginBottom: "10px",
+          cursor: "pointer"
+        }}
+      >
+        Forgot password?
+      </div>
+
+      <button onClick={handleLogin} style={styles.button}>
+        Login
+      </button>
+    </div>
+  </>
+)}
 
       </div>
     </div>
