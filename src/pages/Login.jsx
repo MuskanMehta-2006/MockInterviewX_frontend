@@ -6,6 +6,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export default function Login() {
+  const isMobile = window.innerWidth < 768;
+  const styles = getStyles(isMobile);
   const location = useLocation();
   const role =
   location.state?.role ||
@@ -128,45 +130,46 @@ const handleLogin = async () => {
   }
 };
 
-  const styles = {
+  const getStyles = (isMobile) => ({
     container: {
-      height: "100vh",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      background: "#f4f6fb",
-      fontFamily: "Inter, sans-serif",
-      padding: "20px",
-      boxSizing: "border-box",
-    },
+  minHeight: "100vh", // ⭐ change
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  background: "#f4f6fb",
+  fontFamily: "Inter, sans-serif",
+  padding: isMobile ? "10px" : "20px",
+  boxSizing: "border-box",
+},
 
     card: {
-      width: "900px",
-      minHeight: "520px",
-      display: "flex",
-      borderRadius: "16px",
-      overflow: "hidden",
-      background: "white",
-      boxShadow: "0 20px 50px rgba(0,0,0,0.1)",
-    },
+  width: isMobile ? "100%" : "900px",
+  flexDirection: isMobile ? "column" : "row", // ⭐ main fix
+  minHeight: isMobile ? "auto" : "520px",
+  display: "flex",
+  borderRadius: "16px",
+  overflow: "hidden",
+  background: "white",
+  boxShadow: "0 20px 50px rgba(0,0,0,0.1)",
+},
 
     left: {
-      width: "50%",
-      position: "relative",
-      background: "#eef2ff",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      padding: "20px",
-    },
-
+  width: isMobile ? "100%" : "50%",
+  height: isMobile ? "200px" : "auto", // ⭐ mobile fix
+  position: "relative",
+  background: "#eef2ff",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  padding: "20px",
+},
    right: {
-  width: "50%",
-  padding: "40px",
+  width: isMobile ? "100%" : "50%",
+  padding: isMobile ? "20px" : "40px",
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
-  position: "relative", // 🔥 ADD THIS
+  position: "relative",
 },
 
     title: {
@@ -217,7 +220,8 @@ inputFocus: {
       fontSize: "12px",
       color: "#64748b",
     },
-  };
+  });
+
 
   return (
     <div style={styles.container}>
@@ -252,7 +256,10 @@ inputFocus: {
          <img
   src={role === "interviewer" ? "/login-interviewer.png" : "/login.png"}
   alt="auth"
-  style={{ height: "400px" }}
+  style={{
+  height: isMobile ? "150px" : "400px",
+  objectFit: "contain"
+}}
 />
 
         </div>
