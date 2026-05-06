@@ -448,8 +448,6 @@ features: {
   borderRadius: "14px",
   textAlign: "center",
   boxShadow: "0 10px 25px rgba(0,0,0,0.08)",
-  width: "100%", // ⭐ full width of grid cell
-  height: "100%" // ⭐ equal height feel
 },
 
   /* FAQ */
