@@ -429,15 +429,13 @@ navbar: {
     borderRadius: "16px",
     boxShadow: "0 20px 40px rgba(0,0,0,0.15)"
   },
-
-  features: {
+features: {
   display: "grid",
- gridTemplateColumns: isMobile
-  ? "1fr"
-  : "repeat(4, 1fr)", // ⭐ FIXED layout
-  justifyContent: "center", // ⭐ center align grid
-  gap: isMobile ? "16px" : "20px",
-  padding: isMobile ? "0 12px" : "0 60px", // ⭐ better alignment
+  gridTemplateColumns: isMobile
+    ? "1fr"
+    : "repeat(auto-fit, minmax(260px, 1fr))", // ⭐ fluid layout
+  gap: "24px",
+  padding: isMobile ? "0 16px" : "0 60px",
   marginTop: "50px",
   maxWidth: "1200px",
   marginLeft: "auto",
@@ -445,14 +443,13 @@ navbar: {
 },
 
  card: {
-  padding: "18px",
+  padding: "20px",
   background: "white",
   borderRadius: "14px",
   textAlign: "center",
   boxShadow: "0 10px 25px rgba(0,0,0,0.08)",
-  width: "100%",
-  maxWidth: "280px", // ✅ prevents stretch
-  margin: "0 auto",  // ✅ center each card
+  width: "100%", // ⭐ full width of grid cell
+  height: "100%" // ⭐ equal height feel
 },
 
   /* FAQ */
