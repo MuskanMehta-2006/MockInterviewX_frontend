@@ -321,7 +321,8 @@ const styles = {
   page: {
     fontFamily: "Arial",
     background: "linear-gradient(135deg, #f8fafc, #eef2ff)",
-    minHeight: "100vh"
+    minHeight: "100vh",
+    overflowX: "hidden"
   },
 logoIcon: {
   width: "50px",
@@ -331,6 +332,8 @@ logoIcon: {
   navbar: {
   position: "sticky",
   top: 0,
+  gap: "24px",
+fontSize: "14px",
   zIndex: 1000,
   display: "flex",
   justifyContent: "space-between",
@@ -346,6 +349,7 @@ navLinks: {
   gap: "22px",
   fontWeight: "500",
   color: "#334155",
+    flexWrap: "wrap",
   cursor: "pointer"
 },
 navLeft: {
@@ -399,16 +403,17 @@ navTag: {
 },
   /* HERO */
   hero: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    flexWrap: "wrap",
-    padding: "60px 40px"
-  },
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  flexWrap: "wrap",
+  padding: "60px 40px",
+  flexDirection: "column",  // 🔥 mobile ke liye
+  padding: "40px 16px",
+},
 
   left: {
     flex: 1,
-    minWidth: "300px"
   },
 
   right: {
@@ -468,13 +473,13 @@ navTag: {
   gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
   gap: "20px",
   marginTop: "50px",
-  padding: "0 40px"
+  padding: "0 16px"
 },
   card: {
     padding: "20px",
     background: "white",
     borderRadius: "14px",
-    width: "220px",
+    width: "100%",
     textAlign: "center",
     boxShadow: "0 10px 25px rgba(0,0,0,0.08)",
     fontWeight: "500"
