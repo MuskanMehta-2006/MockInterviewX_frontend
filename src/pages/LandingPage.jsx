@@ -62,81 +62,99 @@ function LandingPage() {
   {/* NAVBAR */}
 <div style={styles.navbar}>
 
-  {/* TOP ROW (logo + buttons) */}
-  <div
-    style={{
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center",
-      width: "100%",
-    }}
-  >
+  {/* LEFT - LOGO */}
+  <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+    <img
+      src="/icon-website.png"
+      alt="logo"
+      style={{ width: "34px", height: "34px" }}
+    />
 
-    {/* LEFT - LOGO */}
-    <div style={{ display: "flex", alignItems: "center" }}>
-      <img
-        src="/icon-website.png"
-        alt="logo"
-        style={{ width: "34px", height: "34px", marginRight: "8px" }}
-      />
+    <span style={{ color: "#111", fontWeight: "800", fontSize: "18px" }}>
+      MockInterview
+    </span>
 
-      <div style={{ display: "flex", alignItems: "center" }}>
-        <span style={{ color: "#111", fontWeight: "800", fontSize: "18px" }}>
-          MockInterview
-        </span>
+    <span style={{ color: "#3b82f6", fontWeight: "900", fontSize: "18px" }}>
+      X
+    </span>
+  </div>
 
-        <span style={{ color: "#3b82f6", fontWeight: "900", fontSize: "18px" }}>
-          X
-        </span>
-      </div>
-    </div>
+  {/* CENTER LINKS (desktop only) */}
+  {!isMobile && (
+    <div style={styles.navLinks}>
+      <span onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
+        Home
+      </span>
 
-    {/* RIGHT BUTTONS */}
-    <div style={styles.navRight}>
-      <div
-        style={styles.earnBtn}
+      <span onClick={() => handleScroll(featuresRef)}>
+        Features
+      </span>
+
+      <span onClick={() => handleScroll(faqRef)}>
+        FAQs
+      </span>
+
+      <span
+        style={{ color: "#6366f1", fontWeight: "600" }}
         onClick={() => {
-          handleRoleSelect("INTERVIEWER");
-          navigate("/login");
+          document.getElementById("hero-section")?.scrollIntoView({
+            behavior: "smooth",
+          });
         }}
       >
-        💰 Earn
-      </div>
-
-      <button
-        style={styles.practiceBtn}
-        onClick={() => handleRoleSelect("INTERVIEWEE")}
-      >
-        Practice
-      </button>
+        Earn 💰
+      </span>
     </div>
-  </div>
+  )}
 
-  {/* CENTER LINKS (separate row for mobile) */}
-  <div style={styles.navLinks}>
-    <span onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
-      Home
-    </span>
-
-    <span onClick={() => handleScroll(featuresRef)}>
-      Features
-    </span>
-
-    <span onClick={() => handleScroll(faqRef)}>
-      FAQs
-    </span>
-
-    <span
-      style={{ color: "#6366f1", fontWeight: "600" }}
+  {/* RIGHT BUTTONS */}
+  <div style={styles.navRight}>
+    <div
+      style={styles.earnBtn}
       onClick={() => {
-        document.getElementById("hero-section")?.scrollIntoView({
-          behavior: "smooth",
-        });
+        handleRoleSelect("INTERVIEWER");
+        navigate("/login");
       }}
     >
-      Earn 💰
-    </span>
+      💰 Earn
+    </div>
+
+    <button
+      style={styles.practiceBtn}
+      onClick={() => handleRoleSelect("INTERVIEWEE")}
+    >
+      Practice
+    </button>
   </div>
+
+  {/* MOBILE LINKS (second row) */}
+  {isMobile && (
+    <div style={styles.navLinks}>
+      <span onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
+        Home
+      </span>
+
+      <span onClick={() => handleScroll(featuresRef)}>
+        Features
+      </span>
+
+      <span onClick={() => handleScroll(faqRef)}>
+        FAQs
+      </span>
+
+      <span
+        style={{ color: "#6366f1", fontWeight: "600" }}
+        onClick={() => {
+          document.getElementById("hero-section")?.scrollIntoView({
+            behavior: "smooth",
+          });
+        }}
+      >
+        Earn 💰
+      </span>
+    </div>
+  )}
+
 
 </div>
 {/* HERO SECTION */}
@@ -315,14 +333,14 @@ practiceBtn: {
   cursor: "pointer",
   fontWeight: "600"
 },
- navbar: {
+navbar: {
   position: "sticky",
   top: 0,
   zIndex: 1000,
-   width: "100%",  
   display: "flex",
-  flexDirection: "column", // 🔥 important
-  alignItems: "center",
+  flexDirection: isMobile ? "column" : "row", // ✅ FIX
+  justifyContent: "space-between",
+  alignItems: isMobile ? "center" : "center",
   padding: isMobile ? "10px 16px" : "12px 30px",
   background: "rgba(255,255,255,0.9)",
   backdropFilter: "blur(10px)",
