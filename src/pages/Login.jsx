@@ -7,7 +7,6 @@ import axios from "axios";
 
 export default function Login() {
   const isMobile = window.innerWidth < 768;
-  const styles = getStyles(isMobile);
   const location = useLocation();
   const role =
   location.state?.role ||
@@ -221,6 +220,7 @@ inputFocus: {
       color: "#64748b",
     },
   });
+   const styles = getStyles(isMobile);
 
 
   return (
