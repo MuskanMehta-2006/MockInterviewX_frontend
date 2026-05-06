@@ -432,22 +432,22 @@ navbar: {
 features: {
   display: "grid",
   gridTemplateColumns: isMobile
-    ? "1fr"
-    : "repeat(auto-fit, minmax(260px, 1fr))", // ⭐ fluid layout
-  gap: "24px",
-  padding: isMobile ? "0 16px" : "0 60px",
+    ? "1fr" // ✅ mobile = single column
+    : "repeat(auto-fit, minmax(250px, 1fr))", // ✅ laptop same
+  gap: "20px",
   marginTop: "50px",
-  maxWidth: "1200px",
-  marginLeft: "auto",
-  marginRight: "auto"
+  padding: isMobile ? "0 12px" : "0 40px"
 },
 
  card: {
   padding: "20px",
   background: "white",
   borderRadius: "14px",
+  width: isMobile ? "100%" : "220px", // ✅ FIX
   textAlign: "center",
   boxShadow: "0 10px 25px rgba(0,0,0,0.08)",
+  fontWeight: "500",
+  margin: "0 auto" // ✅ center cards on laptop
 },
 
   /* FAQ */
