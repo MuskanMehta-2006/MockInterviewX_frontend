@@ -303,7 +303,8 @@ const getStyles = (isMobile) => ({
   page: {
     fontFamily: "Arial",
     background: "linear-gradient(135deg, #f8fafc, #eef2ff)",
-    minHeight: "100vh"
+    minHeight: "100vh",
+     overflowX: "hidden" // ⭐ FIX overflow
   },
 navRight: {
   display: "flex",
@@ -429,29 +430,30 @@ navbar: {
     boxShadow: "0 20px 40px rgba(0,0,0,0.15)"
   },
 
-  /* FEATURES */
   features: {
   display: "grid",
-  gridTemplateColumns: isMobile
-    ? "1fr"
-    : "repeat(auto-fit, minmax(260px, 1fr))",
-  gap: isMobile ? "16px" : "24px",
+ gridTemplateColumns: isMobile
+  ? "1fr"
+  : "repeat(4, 1fr)", // ⭐ FIXED layout
+  justifyContent: "center", // ⭐ center align grid
+  gap: isMobile ? "16px" : "20px",
+  padding: isMobile ? "0 12px" : "0 60px", // ⭐ better alignment
   marginTop: "50px",
-  padding: isMobile ? "0 16px" : "0 40px",
   maxWidth: "1200px",
   marginLeft: "auto",
   marginRight: "auto"
 },
 
-  card: {
-    padding: "20px",
-    background: "white",
-    borderRadius: "14px",
-    textAlign: "center",
-    boxShadow: "0 10px 25px rgba(0,0,0,0.08)",
-    width: "100%", // ✅ grid fix
-    transition: "0.2s ease"
-  },
+ card: {
+  padding: "18px",
+  background: "white",
+  borderRadius: "14px",
+  textAlign: "center",
+  boxShadow: "0 10px 25px rgba(0,0,0,0.08)",
+  width: "100%",
+  maxWidth: "280px", // ✅ prevents stretch
+  margin: "0 auto",  // ✅ center each card
+},
 
   /* FAQ */
   faq: {
