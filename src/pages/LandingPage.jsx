@@ -59,123 +59,86 @@ function LandingPage() {
  return (
   <div style={styles.page}>
 
-    {/* NAVBAR */}
-    <div
-      style={{
-        ...styles.navbar,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        padding: "10px 24px",
-      }}
-    >
+  {/* NAVBAR */}
+<div style={styles.navbar}>
 
-      {/* LEFT - LOGO */}
+  {/* TOP ROW (logo + buttons) */}
+  <div
+    style={{
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+      width: "100%",
+    }}
+  >
+
+    {/* LEFT - LOGO */}
+    <div style={{ display: "flex", alignItems: "center" }}>
+      <img
+        src="/icon-website.png"
+        alt="logo"
+        style={{ width: "34px", height: "34px", marginRight: "8px" }}
+      />
+
       <div style={{ display: "flex", alignItems: "center" }}>
-        <img
-          src="/icon-website.png"
-          alt="logo"
-          style={{ width: "34px", height: "34px", marginRight: "8px" }}
-        />
+        <span style={{ color: "#111", fontWeight: "800", fontSize: "18px" }}>
+          MockInterview
+        </span>
 
-        <div style={{ display: "flex", alignItems: "center" }}>
-          <span
-            style={{
-              color: "#111",
-              fontWeight: "800",
-              fontSize: "18px",
-              letterSpacing: "0.5px",
-            }}
-          >
-            MockInterview
-          </span>
-
-          <span
-            style={{
-              color: "#3b82f6",
-              fontWeight: "900",
-              fontSize: "18px",
-            }}
-          >X
-          </span>
-        </div>
+        <span style={{ color: "#3b82f6", fontWeight: "900", fontSize: "18px" }}>
+          X
+        </span>
       </div>
+    </div>
 
-      {/* CENTER LINKS */}
+    {/* RIGHT BUTTONS */}
+    <div style={styles.navRight}>
       <div
-        style={{
-          display: "flex",
-          gap: "24px",
-          fontSize: "14px",
-          fontWeight: "500",
-          color: "#444",
+        style={styles.earnBtn}
+        onClick={() => {
+          handleRoleSelect("INTERVIEWER");
+          navigate("/login");
         }}
       >
-        <span style={{ cursor: "pointer" }} onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
-          Home
-        </span>
-
-        <span style={{ cursor: "pointer" }} onClick={() => handleScroll(featuresRef)}>
-          Features
-        </span>
-
-        <span style={{ cursor: "pointer" }} onClick={() => handleScroll(faqRef)}>
-          FAQs
-        </span>
-
-        
-
-        <span
-  style={{ color: "#6366f1", fontWeight: "600", cursor: "pointer" }}
-  onClick={() => {
-    document.getElementById("hero-section")?.scrollIntoView({
-      behavior: "smooth",
-    });
-  }}
->
-  Take Interview & Earn 💰
-</span>
+        💰 Earn
       </div>
 
-      {/* RIGHT BUTTONS */}
-      <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-
-        <div
-          style={{
-            padding: "6px 12px",
-            background: "#eef2ff",
-            color: "#4f46e5",
-            borderRadius: "8px",
-            cursor: "pointer",
-            fontWeight: "600",
-            fontSize: "13px",
-          }}
-          onClick={() => {
-            handleRoleSelect("INTERVIEWER");
-            navigate("/login");
-          }}
-        >
-          💰 Earn Money
-        </div>
-
-        <button
-          style={{
-            padding: "8px 16px",
-            background: "#3b82f6",
-            color: "white",
-            border: "none",
-            borderRadius: "8px",
-            cursor: "pointer",
-            fontWeight: "600",
-          }}
-          onClick={() => handleRoleSelect("INTERVIEWEE")}
-        >
-          Practice
-        </button>
-
-      </div>
-
+      <button
+        style={styles.practiceBtn}
+        onClick={() => handleRoleSelect("INTERVIEWEE")}
+      >
+        Practice
+      </button>
     </div>
+  </div>
+
+  {/* CENTER LINKS (separate row for mobile) */}
+  <div style={styles.navLinks}>
+    <span onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
+      Home
+    </span>
+
+    <span onClick={() => handleScroll(featuresRef)}>
+      Features
+    </span>
+
+    <span onClick={() => handleScroll(faqRef)}>
+      FAQs
+    </span>
+
+    <span
+      style={{ color: "#6366f1", fontWeight: "600" }}
+      onClick={() => {
+        document.getElementById("hero-section")?.scrollIntoView({
+          behavior: "smooth",
+        });
+      }}
+    >
+      Earn 💰
+    </span>
+  </div>
+
+</div>
 {/* HERO SECTION */}
 <div style={styles.hero}>
   <div style={styles.left}>
@@ -324,31 +287,60 @@ const getStyles = (isMobile) => ({
     background: "linear-gradient(135deg, #f8fafc, #eef2ff)",
     minHeight: "100vh"
   },
+navRight: {
+  display: "flex",
+  alignItems: "center",
+  gap: "10px"
+},
 
-  navbar: {
-    position: "sticky",
-    top: 0,
-    zIndex: 1000,
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: isMobile ? "10px 16px" : "12px 30px",
-    background: "rgba(255,255,255,0.9)",
-    backdropFilter: "blur(10px)",
-    boxShadow: "0 2px 15px rgba(0,0,0,0.06)"
-  },
+
+
+
+earnBtn: {
+  padding: "6px 10px",
+  background: "#eef2ff",
+  color: "#4f46e5",
+  borderRadius: "8px",
+  cursor: "pointer",
+  fontWeight: "600",
+  fontSize: "13px"
+},
+
+practiceBtn: {
+  padding: "8px 14px",
+  background: "#3b82f6",
+  color: "white",
+  border: "none",
+  borderRadius: "8px",
+  cursor: "pointer",
+  fontWeight: "600"
+},
+ navbar: {
+  position: "sticky",
+  top: 0,
+  zIndex: 1000,
+   width: "100%",  
+  display: "flex",
+  flexDirection: "column", // 🔥 important
+  alignItems: "center",
+  padding: isMobile ? "10px 16px" : "12px 30px",
+  background: "rgba(255,255,255,0.9)",
+  backdropFilter: "blur(10px)",
+  boxShadow: "0 2px 15px rgba(0,0,0,0.06)"
+},
 
   /* NAV LINKS (add this in JSX manually) */
   navLinks: {
-    display: "flex",
-    gap: isMobile ? "12px" : "24px",
-    flexWrap: "wrap", // ✅ mobile fix
-    justifyContent: isMobile ? "center" : "flex-start",
-    fontSize: "14px",
-    fontWeight: "500",
-    color: "#444"
-  },
-
+  display: "flex",
+  gap: isMobile ? "12px" : "24px",
+  flexWrap: "wrap",
+  justifyContent: "center",
+  marginTop: isMobile ? "10px" : "0",
+  fontSize: "14px",
+  fontWeight: "500",
+  color: "#444",
+  cursor: "pointer"
+},
   hero: {
     display: "flex",
     flexDirection: isMobile ? "column" : "row",
@@ -421,12 +413,17 @@ const getStyles = (isMobile) => ({
 
   /* FEATURES */
   features: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-    gap: "20px",
-    marginTop: "50px",
-    padding: isMobile ? "0 16px" : "0 40px"
-  },
+  display: "grid",
+  gridTemplateColumns: isMobile
+    ? "1fr"
+    : "repeat(auto-fit, minmax(260px, 1fr))",
+  gap: isMobile ? "16px" : "24px",
+  marginTop: "50px",
+  padding: isMobile ? "0 16px" : "0 40px",
+  maxWidth: "1200px",
+  marginLeft: "auto",
+  marginRight: "auto"
+},
 
   card: {
     padding: "20px",
