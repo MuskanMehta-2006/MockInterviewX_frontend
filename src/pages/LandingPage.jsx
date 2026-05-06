@@ -2,6 +2,9 @@ import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 function LandingPage() {
+  
+  const isMobile = window.innerWidth < 768; 
+   const styles = getStyles(isMobile);
   const navigate = useNavigate();
 
   // refs for scroll
@@ -315,100 +318,50 @@ function LandingPage() {
     </div>
   );
 }
-
-const styles = {
-
+const getStyles = (isMobile) => ({
   page: {
     fontFamily: "Arial",
     background: "linear-gradient(135deg, #f8fafc, #eef2ff)",
     minHeight: "100vh"
   },
-logoIcon: {
-  width: "50px",
-  height: "50px",
-  objectFit: "contain"
-},
+
   navbar: {
-  position: "sticky",
-  top: 0,
-  zIndex: 1000,
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-  padding: "12px 30px",
-  background: "rgba(255,255,255,0.9)",
-  backdropFilter: "blur(10px)",
-  boxShadow: "0 2px 15px rgba(0,0,0,0.06)"
-},
-
-navLinks: {
-  display: "flex",
-  gap: "22px",
-  fontWeight: "500",
-  color: "#334155",
-  cursor: "pointer"
-},
-navLeft: {
-  display: "flex",
-  alignItems: "center",
-  gap: "12px"
-},
-navRight: {
-  display: "flex",
-  alignItems: "center",
-  gap: "10px"
-},
-earnBadge: {
-  fontSize: "11px",
-  padding: "6px 10px",
-  background: "linear-gradient(135deg, #f59e0b, #f97316)",
-  color: "white",
-  borderRadius: "20px",
-  cursor: "pointer",
-  fontWeight: "600",
-  boxShadow: "0 6px 15px rgba(245, 158, 11, 0.3)",
-  transition: "0.2s ease",
-},
-
-earnBadgeHover: {
-  transform: "scale(1.05)"
-},
-navBtn: {
-  padding: "8px 14px",
-  border: "1px solid #cbd5e1",
-  borderRadius: "8px",
-  background: "white",
-  cursor: "pointer"
-},
-
-navCta: {
-  padding: "8px 14px",
-  border: "none",
-  borderRadius: "8px",
-  background: "#3b82f6",
-  color: "white",
-  cursor: "pointer"
-},
-
-navTag: {
-  fontSize: "11px",
-  color: "#64748b",
-  maxWidth: "170px",
-  textAlign: "right",
-  lineHeight: "1.2"
-},
-  /* HERO */
-  hero: {
+    position: "sticky",
+    top: 0,
+    zIndex: 1000,
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    flexWrap: "wrap",
-    padding: "60px 40px"
+    padding: isMobile ? "10px 16px" : "12px 30px",
+    background: "rgba(255,255,255,0.9)",
+    backdropFilter: "blur(10px)",
+    boxShadow: "0 2px 15px rgba(0,0,0,0.06)"
+  },
+
+  /* NAV LINKS (add this in JSX manually) */
+  navLinks: {
+    display: "flex",
+    gap: isMobile ? "12px" : "24px",
+    flexWrap: "wrap", // ✅ mobile fix
+    justifyContent: isMobile ? "center" : "flex-start",
+    fontSize: "14px",
+    fontWeight: "500",
+    color: "#444"
+  },
+
+  hero: {
+    display: "flex",
+    flexDirection: isMobile ? "column" : "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: isMobile ? "40px 16px" : "60px 40px",
+    gap: "30px" // ✅ spacing fix
   },
 
   left: {
     flex: 1,
-    minWidth: "300px"
+    minWidth: "280px",
+    textAlign: isMobile ? "center" : "left" // ✅ mobile center
   },
 
   right: {
@@ -418,14 +371,15 @@ navTag: {
   },
 
   title: {
-    fontSize: "42px",
+    fontSize: isMobile ? "28px" : "42px",
     fontWeight: "bold",
-    color: "#0f172a"
+    color: "#0f172a",
+    lineHeight: "1.2"
   },
 
   subtitle: {
     marginTop: "15px",
-    fontSize: "16px",
+    fontSize: isMobile ? "14px" : "16px",
     color: "#475569",
     lineHeight: "1.6"
   },
@@ -434,7 +388,8 @@ navTag: {
     marginTop: "25px",
     display: "flex",
     gap: "15px",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
+    justifyContent: isMobile ? "center" : "flex-start"
   },
 
   btnPrimary: {
@@ -443,7 +398,8 @@ navTag: {
     color: "white",
     border: "none",
     borderRadius: "10px",
-    cursor: "pointer"
+    cursor: "pointer",
+    fontSize: isMobile ? "14px" : "16px"
   },
 
   btnSecondary: {
@@ -452,38 +408,40 @@ navTag: {
     color: "white",
     border: "none",
     borderRadius: "10px",
-    cursor: "pointer"
+    cursor: "pointer",
+    fontSize: isMobile ? "14px" : "16px"
   },
 
   image: {
     width: "100%",
-    maxWidth: "600px",
+    maxWidth: isMobile ? "300px" : "600px", // ✅ responsive image
     borderRadius: "16px",
     boxShadow: "0 20px 40px rgba(0,0,0,0.15)"
   },
 
   /* FEATURES */
   features: {
-  display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-  gap: "20px",
-  marginTop: "50px",
-  padding: "0 40px"
-},
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+    gap: "20px",
+    marginTop: "50px",
+    padding: isMobile ? "0 16px" : "0 40px"
+  },
+
   card: {
     padding: "20px",
     background: "white",
     borderRadius: "14px",
-    width: "220px",
     textAlign: "center",
     boxShadow: "0 10px 25px rgba(0,0,0,0.08)",
-    fontWeight: "500"
+    width: "100%", // ✅ grid fix
+    transition: "0.2s ease"
   },
 
   /* FAQ */
   faq: {
     marginTop: "70px",
-    padding: "30px"
+    padding: isMobile ? "20px" : "30px"
   },
 
   faqItem: {
@@ -501,8 +459,9 @@ navTag: {
 
   faqA: {
     marginTop: "8px",
-    color: "#475569"
+    color: "#475569",
+    fontSize: isMobile ? "14px" : "15px"
   }
-};
+});
 
 export default LandingPage;
