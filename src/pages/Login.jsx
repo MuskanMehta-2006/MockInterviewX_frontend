@@ -141,26 +141,28 @@ const handleLogin = async () => {
   boxSizing: "border-box",
 },
 
-    card: {
+   card: {
   width: isMobile ? "100%" : "900px",
-  flexDirection: isMobile ? "column" : "row", // ⭐ main fix
+  flexDirection: isMobile ? "column" : "row",
   minHeight: isMobile ? "auto" : "520px",
   display: "flex",
   borderRadius: "16px",
   overflow: "hidden",
   background: "white",
   boxShadow: "0 20px 50px rgba(0,0,0,0.1)",
+  gap: isMobile ? "10px" : "0", // ⭐ spacing fix
 },
 
     left: {
   width: isMobile ? "100%" : "50%",
-  height: isMobile ? "200px" : "auto", // ⭐ mobile fix
-  position: "relative",
+  height: isMobile ? "auto" : "auto", // ❌ remove fixed 200px
+  minHeight: isMobile ? "180px" : "auto", // ⭐ controlled height
   background: "#eef2ff",
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  padding: "20px",
+  padding: isMobile ? "10px" : "20px",
+  position: "relative",
 },
    right: {
   width: isMobile ? "100%" : "50%",
@@ -232,15 +234,16 @@ inputFocus: {
 
           {/* BRAND */}
           <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "6px",
-              position: "absolute",
-              top: "15px",
-              left: "20px",
-            }}
-          >
+  style={{
+    display: "flex",
+    alignItems: "center",
+    gap: "6px",
+    position: isMobile ? "static" : "absolute", // ⭐ FIX
+    marginBottom: isMobile ? "10px" : "0",
+    top: "15px",
+    left: "20px",
+  }}
+>
             <img
               src="/icon-website.png"
               alt="logo"
@@ -256,10 +259,12 @@ inputFocus: {
          <img
   src={role === "interviewer" ? "/login-interviewer.png" : "/login.png"}
   alt="auth"
-  style={{
-  height: isMobile ? "150px" : "400px",
-  objectFit: "contain"
-}}
+ style={{
+    width: "100%",
+    maxWidth: isMobile ? "220px" : "400px", // ⭐ IMPORTANT
+    height: "auto",
+    objectFit: "contain"
+  }}
 />
 
         </div>
