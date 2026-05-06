@@ -447,7 +447,7 @@ features: {
   textAlign: "center",
   boxShadow: "0 10px 25px rgba(0,0,0,0.08)",
   fontWeight: "500",
-  margin: "0 auto" // ✅ center cards on laptop
+  marginRight: isMobile ? "12px" : "0",
 },
 
   /* FAQ */
