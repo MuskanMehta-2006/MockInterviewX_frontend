@@ -28,7 +28,7 @@ const sendOtp = async () => {
     alert("Checking email...");
 
     // 🔥 SEND OTP WITH ROLE
-    await axios.post("http://localhost:8080/auth/send-otp", {
+    await axios.post("http://localhost:8080/api/auth/send-otp", {
   email,
   role,
   type: "FORGOT",
