@@ -29,7 +29,7 @@ const sendOtp = async () => {
     console.log("Sending OTP for:", email, role);
 
     // 🔥 API CALL WITH ROLE
-    await API.post("/auth/send-otp", {
+    await axios.post("http://localhost:8080/auth/send-otp", {
       email,
       role, // ✔️ IMPORTANT
       type: "REGISTER",

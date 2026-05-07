@@ -28,11 +28,11 @@ const sendOtp = async () => {
     alert("Checking email...");
 
     // 🔥 SEND OTP WITH ROLE
-    await API.post("/auth/send-otp", {
-      email,
-      role, // ✔️ IMPORTANT
-      type: "FORGOT",
-    });
+    await axios.post("http://localhost:8080/auth/send-otp", {
+  email,
+  role,
+  type: "FORGOT",
+});
 
     alert("OTP sent successfully 📩");
     setStep(2);
